@@ -40,7 +40,7 @@ export const Presenter = ({ slides, children }) => {
             width: '25%',
             p: 3,
           }}>
-          <Zoom ratio={4 / 3} zoom={1 / 4}>
+          <Zoom zoom={1 / 4}>
             <Slide slide={next} preview />
           </Zoom>
           {notes && (

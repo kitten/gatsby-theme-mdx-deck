@@ -26,7 +26,6 @@ const components = {
 export const Embed = ({
   src: Deck,
   slide = 1,
-  ratio = 16 / 9,
   zoom = 1,
   ...props
 }) => (
@@ -34,7 +33,6 @@ export const Embed = ({
     {...props}
     components={components}
     slide={slide}
-    ratio={ratio}
     zoom={zoom}
   />
 )

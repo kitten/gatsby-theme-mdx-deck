@@ -1,14 +1,13 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 
-export const Zoom = ({ ratio, zoom = 1, ...props }) => (
+export const Zoom = ({ zoom = 1, ...props }) => (
   <div
     sx={{
       boxSizing: 'border-box',
       width: '100%',
       position: 'relative',
-      height: ratio ? 0 : '100%',
-      pb: ratio ? `${(1 / ratio) * 100}%` : 0,
+      height: '100%'
     }}>
     <div
       {...props}

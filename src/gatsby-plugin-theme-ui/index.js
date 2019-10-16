@@ -1,4 +1,8 @@
 export default {
+  size: {
+    width: 1366,
+    height: 768
+  },
   colors: {
     text: '#000',
     background: '#fff',

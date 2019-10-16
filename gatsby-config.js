@@ -20,6 +20,14 @@ const config = (opts = {}) => ({
       },
     },
     {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /\.svg$/
+        }
+      }
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins,
@@ -29,13 +37,7 @@ const config = (opts = {}) => ({
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
     'gatsby-plugin-catch-links',
-    'gatsby-plugin-theme-ui',
-    {
-      resolve: 'gatsby-plugin-compile-es6-packages',
-      options: {
-        modules: ['@philpl/gatsby-theme-mdx-deck'],
-      },
-    },
+    'gatsby-plugin-theme-ui'
   ].filter(Boolean),
 });
 
