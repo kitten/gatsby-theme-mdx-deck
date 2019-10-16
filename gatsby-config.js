@@ -29,7 +29,7 @@ const config = (opts = {}) => {
       {
         resolve: 'gatsby-plugin-compile-es6-packages',
         options: {
-          modules: ['@mdx-deck/themes'],
+          modules: ['@philpl/gatsby-theme-mdx-deck'],
         },
       },
     ].filter(Boolean),
