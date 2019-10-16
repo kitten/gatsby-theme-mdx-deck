@@ -4,12 +4,10 @@ import React, { Fragment } from 'react'
 import Context from '../context'
 import useDeck from '../hooks/use-deck'
 import useSwipe from '../hooks/use-swipe'
-import useScale from '../hooks/use-scale'
 import { modes } from '../constants'
 
 export const Slide = ({ slide, index, preview, ...props }) => {
   const outer = useDeck()
-  const scale = useScale()
   const swipeProps = useSwipe()
   const context = {
     ...outer,
@@ -17,8 +15,8 @@ export const Slide = ({ slide, index, preview, ...props }) => {
     preview,
   }
 
-  const slideWidth = outer.theme.size.width || 1366
-  const slideHeight = outer.theme.size.height || 768
+  const slideWidth = outer.theme.size.width
+  const slideHeight = outer.theme.size.height
 
   return (
     <Context.Provider value={context}>
@@ -27,7 +25,7 @@ export const Slide = ({ slide, index, preview, ...props }) => {
           position: 'relative',
           width: '100%',
           height: '100%',
-          transform: `scale(${scale})`,
+          transform: `scale(${outer.scale})`,
           transformOrigin: 'center'
         }}
       >

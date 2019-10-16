@@ -22,13 +22,17 @@ const components = {
   wrapper,
 }
 
-export default ({
+const DeckTemplate = ({
   data: {
     deck: { id, body },
   },
   ...props
-}) => {
-  const Component = props => <MDXRenderer {...props} children={body} />
+}) => (
+  <MDXRenderer
+    {...props}
+    components={components}
+    children={body}
+  />
+)
 
-  return <Component {...props} components={components} />
-}
+export default DeckTemplate

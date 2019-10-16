@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
-import useDeck from './use-deck'
 
-const useScale = () => {
+const useScale = (
+  slideWidth = 1366,
+  slideHeight = 768
+) => {
   const [ratio, setRatio] = useState(1)
-  const { theme } = useDeck()
-
-  const slideWidth = theme.size.width || 1366
-  const slideHeight = theme.size.height || 768
 
   useEffect(() => {
     const handleResize = () => {

@@ -6,6 +6,12 @@ const gatsbyRemarkPlugins = [`gatsby-remark-import-code`]
 const config = (opts = {}) => ({
   plugins: [
     {
+      resolve: 'gatsby-plugin-layout',
+      options: {
+        component: require.resolve('./src/templates/deck.js'),
+      },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'decks',

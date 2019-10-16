@@ -8,6 +8,7 @@ import merge from 'lodash.merge'
 import useKeyboard from '../hooks/use-keyboard'
 import useStorage from '../hooks/use-storage'
 import useDeck from '../hooks/use-deck'
+import useScale from '../hooks/use-scale'
 import Context from '../context'
 import Wrapper from './wrapper'
 import Slide from './slide'
@@ -53,7 +54,7 @@ const mergeThemes = (...themes) =>
 
 const DefaultMode = ({ children }) => <React.Fragment children={children} />
 
-export default ({
+const Deck = ({
   slides = [],
   pageContext: { title, slug },
   theme = {},
@@ -67,8 +68,14 @@ export default ({
 
   const { components, ...mergedTheme } = mergeThemes(theme, ...themes)
 
+  const scale = useScale(
+    mergedTheme.size.width,
+    mergedTheme.size.height,
+  )
+
   const context = {
     ...outer,
+    scale,
     slug,
     length: slides.length,
     index,
@@ -131,3 +138,5 @@ export default ({
     </>
   )
 }
+
+export default Deck
