@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from 'react'
 import Zoom from './zoom'
 import Slide from './slide'
 import useDeck from '../hooks/use-deck'
-import useScale from '../hooks/use-scale'
 
 const noop = () => {}
 
@@ -15,7 +14,6 @@ export const SlideList = ({
   ...props
 }) => {
   const { index, theme } = useDeck()
-  const ratio = useScale()
   const thumb = useRef(null)
 
   useEffect(() => {
@@ -50,7 +48,7 @@ export const SlideList = ({
             cursor: 'pointer',
             outline: index === i ? `4px solid cyan` : null,
           }}>
-          <Zoom zoom={zoom * ratio}>
+          <Zoom zoom={zoom}>
             <Slide slide={slide} preview />
           </Zoom>
         </div>

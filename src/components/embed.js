@@ -4,7 +4,7 @@ import splitSlides from '../split-slides'
 import Slide from './slide'
 import Zoom from './zoom'
 
-const wrapper = ({ slide: i, ratio, zoom, ...props }) => {
+const wrapper = ({ slide: i, zoom, ...props }) => {
   const slides = splitSlides(props)
   const slide = slides[i - 1]
 
@@ -13,7 +13,7 @@ const wrapper = ({ slide: i, ratio, zoom, ...props }) => {
   }
 
   return (
-    <Zoom zoom={zoom} ratio={ratio}>
+    <Zoom zoom={zoom}>
       <Slide slide={slide} preview />
     </Zoom>
   )
