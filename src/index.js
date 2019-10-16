@@ -20,5 +20,3 @@ export { SplitRight } from './components/split-right'
 
 export { useDeck } from './hooks/use-deck'
 export { useSteps } from './hooks/use-steps'
-
-export { convertLegacyTheme } from './convert-legacy-theme'

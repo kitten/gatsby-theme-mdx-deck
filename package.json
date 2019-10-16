@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-theme-mdx-deck",
-  "version": "3.0.13",
+  "name": "@philpl/gatsby-theme-mdx-deck",
+  "version": "3.1.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -43,6 +43,5 @@
     "remark-emoji": "^2.0.2",
     "remark-unwrap-images": "^1.0.0",
     "theme-ui": "^0.2.14"
-  },
-  "gitHead": "2e6e342cccc32569fd7e2ae2a0711dd91e58d59f"
+  }
 }
