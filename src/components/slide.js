@@ -22,7 +22,7 @@ export const Slide = ({ slide, index, preview, ...props }) => {
         sx={{
           boxSizing: 'border-box',
           width: '100%',
-          height: context.mode === modes.print ? '100vh' : '100%',
+          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

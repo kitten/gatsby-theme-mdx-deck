@@ -27,22 +27,6 @@ const Storage = () => {
   return false
 }
 
-const Print = ({ slides }) => {
-  const outer = useDeck()
-  const context = {
-    ...outer,
-    mode: modes.print,
-  }
-
-  return (
-    <Context.Provider value={context}>
-      {slides.map((slide, i) => (
-        <Slide key={i} slide={slide} preview />
-      ))}
-    </Context.Provider>
-  )
-}
-
 const getIndex = () => {
   const { pathname } = globalHistory.location
   const paths = pathname.split('/')
@@ -139,7 +123,6 @@ export default ({
                 {slides.map((slide, i) => (
                   <Slide key={i} index={i} path={i + '/*'} slide={slide} />
                 ))}
-                <Print path="/print" slides={slides} />
               </Router>
             </Mode>
           </Wrapper>

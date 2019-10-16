@@ -16,7 +16,7 @@ export default props => {
       children,
       ...childProps
     } = child.props
-    if (originalType.mdxDeckHead) {
+    if (originalType && originalType.mdxDeckHead) {
       slides.head.children.push(children)
       Object.assign(slides.head.props, childProps)
       arr.splice(i, 1)

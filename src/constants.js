@@ -3,5 +3,4 @@ export const modes = {
   presenter: 'PRESENTER',
   overview: 'OVERVIEW',
   grid: 'GRID',
-  print: 'PRINT',
 }
