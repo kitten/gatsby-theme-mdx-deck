@@ -17,7 +17,7 @@ export default ({ slides }) => {
       <div
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',
+          flexWrap: 'wrap'
         }}>
         <SlideList
           slides={slides}

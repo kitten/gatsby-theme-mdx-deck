@@ -1,7 +1,14 @@
 const IS_LOCAL = process.cwd() === __dirname
 
-const remarkPlugins = [require('remark-unwrap-images'), require('remark-emoji')]
-const gatsbyRemarkPlugins = [`gatsby-remark-import-code`]
+const remarkPlugins = [
+  require('remark-unwrap-images'),
+  require('remark-grid-tables'),
+  require('remark-emoji')
+]
+
+const gatsbyRemarkPlugins = [
+  'gatsby-remark-import-code'
+]
 
 const config = (opts = {}) => ({
   plugins: [

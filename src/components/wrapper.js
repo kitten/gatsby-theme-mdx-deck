@@ -38,7 +38,7 @@ export default props => {
       sx={{
         width,
         height,
-        overflow: 'hidden',
+        position: 'relative',
         variant: 'styles.root',
         '*': {
           boxSizing: 'border-box',

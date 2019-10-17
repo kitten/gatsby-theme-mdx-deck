@@ -21,34 +21,25 @@ export const Slide = ({ slide, index, preview, ...props }) => {
   return (
     <Context.Provider value={context}>
       <div
+        {...(!preview ? swipeProps : {})}
         sx={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          transform: `scale(${outer.scale})`,
-          transformOrigin: 'center'
-        }}
-      >
-        <div
-          {...(!preview ? swipeProps : {})}
-          sx={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            boxSizing: 'border-box',
-            width: `${slideWidth}px`,
-            height: `${slideHeight}px`,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'text',
-            bg: 'background',
-            variant: 'styles.Slide',
-          }}>
-          {slide}
-        </div>
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: `translate(-50%, -50%) scale(${outer.scale})`,
+          transformOrigin: 'center',
+          boxSizing: 'border-box',
+          width: `${slideWidth}px`,
+          height: `${slideHeight}px`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'text',
+          bg: 'background',
+          variant: 'styles.Slide',
+        }}>
+        {slide}
       </div>
     </Context.Provider>
   )
