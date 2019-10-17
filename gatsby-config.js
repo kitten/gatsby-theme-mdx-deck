@@ -2,7 +2,6 @@ const IS_LOCAL = process.cwd() === __dirname
 
 const remarkPlugins = [
   require('remark-unwrap-images'),
-  require('remark-grid-tables'),
   require('remark-emoji')
 ]
 
@@ -12,6 +11,15 @@ const gatsbyRemarkPlugins = [
 
 const config = (opts = {}) => ({
   plugins: [
+    {
+      resolve: 'gatsby-plugin-alias-imports',
+      options: {
+        alias: {
+          'mdx-deck': __dirname,
+          'gatsby-theme-mdx-deck': __dirname
+        }
+      }
+    },
     {
       resolve: 'gatsby-plugin-layout',
       options: {
