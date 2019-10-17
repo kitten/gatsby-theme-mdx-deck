@@ -15,6 +15,8 @@ import Wrapper from './wrapper'
 import Slide from './slide'
 import { modes } from '../constants'
 
+import baseTheme from '../gatsby-plugin-theme-ui/index'
+
 import Presenter from './presenter'
 import Overview from './overview'
 import Grid from './grid'
@@ -55,24 +57,12 @@ const mergeThemes = (...themes) =>
 
 const DefaultMode = ({ children }) => <React.Fragment children={children} />
 
-const RouterForLocation = ({ location, children }) => (
-  <Router
-    location={item}
-    basepath={slug}
-    style={{
-      height: '100%',
-    }}
-  >
-    {children}
-  </Router>
-);
-
 const TransitionRouter = ({ location, children }) => {
   const { theme: { transition }, slug } = useDeck()
 
-  const from = (transition ? transition.length === 2 ? transition[1] : transition[0] : null) {};
-  const enter = (transition ? transition.length === 2 ? transition[0] : transition[1] : null) {};
-  const leave = (transition ? transition.length === 2 ? transition[1] : transition[2] : null) {};
+  const from = (transition ? transition.length === 2 ? transition[1] : transition[0] : null) || {};
+  const enter = (transition ? transition.length === 2 ? transition[0] : transition[1] : null) || {};
+  const leave = (transition ? transition.length === 2 ? transition[1] : transition[2] : null) || {};
 
   const transitions = useTransition(location, location => location.key, {
     from,
@@ -80,13 +70,11 @@ const TransitionRouter = ({ location, children }) => {
     leave,
   })
 
-  if (!transition) {
-    return <RouterForLocation location={item}>{children}</RouterForLocation>;
-  }
-
   return transitions.map(({ item, key, props }) => (
     <animated.div key={key} style={props}>
-      <RouterForLocation location={item}>{children}</RouterForLocation>
+      <Router basepath={slug} location={item} style={{ height: '100%' }}>
+        {children}
+      </Router>
     </animated.div>
   ));
 };
@@ -103,7 +91,10 @@ const Deck = ({
 
   const head = slides.head.children
 
-  const { components, ...mergedTheme } = mergeThemes(theme, ...themes)
+  const { components, ...mergedTheme } = mergeThemes(
+    { ...baseTheme,...theme },
+    ...themes
+  )
 
   const scale = useScale(
     mergedTheme.size.width,
