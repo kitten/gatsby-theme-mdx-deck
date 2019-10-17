@@ -1,5 +1,6 @@
 import React from 'react'
-import { Router, globalHistory } from '@reach/router'
+import { useTransition, animated } from 'react-spring'
+import { Location, Router, globalHistory } from '@reach/router'
 import { Global } from '@emotion/core'
 import { ThemeProvider } from 'theme-ui'
 import { Helmet } from 'react-helmet'
@@ -53,6 +54,42 @@ const mergeThemes = (...themes) =>
   )
 
 const DefaultMode = ({ children }) => <React.Fragment children={children} />
+
+const RouterForLocation = ({ location, children }) => (
+  <Router
+    location={item}
+    basepath={slug}
+    style={{
+      height: '100%',
+    }}
+  >
+    {children}
+  </Router>
+);
+
+const TransitionRouter = ({ location, children }) => {
+  const { theme: { transition }, slug } = useDeck()
+
+  const from = (transition ? transition.length === 2 ? transition[1] : transition[0] : null) {};
+  const enter = (transition ? transition.length === 2 ? transition[0] : transition[1] : null) {};
+  const leave = (transition ? transition.length === 2 ? transition[1] : transition[2] : null) {};
+
+  const transitions = useTransition(location, location => location.key, {
+    from,
+    enter,
+    leave,
+  })
+
+  if (!transition) {
+    return <RouterForLocation location={item}>{children}</RouterForLocation>;
+  }
+
+  return transitions.map(({ item, key, props }) => (
+    <animated.div key={key} style={props}>
+      <RouterForLocation location={item}>{children}</RouterForLocation>
+    </animated.div>
+  ));
+};
 
 const Deck = ({
   slides = [],
@@ -121,16 +158,16 @@ const Deck = ({
           <Storage />
           <Wrapper>
             <Mode slides={slides}>
-              <Router
-                basepath={slug}
-                style={{
-                  height: '100%',
-                }}>
-                <Slide index={0} path="/" slide={slides[0]} />
-                {slides.map((slide, i) => (
-                  <Slide key={i} index={i} path={i + '/*'} slide={slide} />
-                ))}
-              </Router>
+              <Location>
+                {({ location }) => (
+                  <TransitionRouter location={location}>
+                    <Slide index={0} path="/" slide={slides[0]} />
+                    {slides.map((slide, i) => (
+                      <Slide key={i} index={i} path={i + '/*'} slide={slide} />
+                    ))}
+                  </TransitionRouter>
+                )}
+              </Location>
             </Mode>
           </Wrapper>
         </ThemeProvider>

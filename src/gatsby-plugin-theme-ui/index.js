@@ -3,6 +3,11 @@ export default {
     width: 1366,
     height: 768
   },
+  transition: [
+    { opacity: 0 },
+    { opacity: 1 },
+    { opacity: 0 },
+  ],
   colors: {
     text: '#000',
     background: '#fff',
