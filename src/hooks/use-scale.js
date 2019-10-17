@@ -5,16 +5,26 @@ const useScale = (
   slideHeight = 768
 ) => {
   const [ratio, setRatio] = useState(1)
+  const [offsetX, setOffsetX] = useState(0)
+  const [offsetY, setOffsetY] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
       const { innerWidth, innerHeight } = window
       const useVerticalRatio =
         innerWidth / innerHeight > slideWidth / slideHeight
-      const newRatio = useVerticalRatio
+      const ratio = useVerticalRatio
         ? innerHeight / slideHeight
         : innerWidth / slideWidth
-      setRatio(newRatio)
+      const offsetX = useVerticalRatio
+        ? ((innerWidth - slideWidth * ratio) / 2) / ratio
+        : 0
+      const offsetY = !useVerticalRatio
+        ? ((innerHeight - slideHeight * ratio) / 2) / ratio
+        : 0
+      setRatio(ratio)
+      setOffsetX(offsetX)
+      setOffsetY(offsetY)
     }
 
     handleResize()
@@ -25,7 +35,7 @@ const useScale = (
     }
   }, [slideWidth, slideHeight])
 
-  return ratio
+  return { offsetX, offsetY, scale: ratio }
 }
 
 export default useScale

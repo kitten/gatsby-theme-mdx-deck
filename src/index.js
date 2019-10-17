@@ -3,6 +3,7 @@ import App from './components/app'
 
 export const wrapPageElement = ({ element }) => <App>{element}</App>
 
+export { Background } from './components/background'
 export { Appear } from './components/appear'
 export { Notes } from './components/notes'
 export { Head } from './components/head'

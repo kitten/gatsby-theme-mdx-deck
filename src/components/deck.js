@@ -75,7 +75,7 @@ const Deck = ({
 
   const context = {
     ...outer,
-    scale,
+    ...scale,
     slug,
     length: slides.length,
     index,
