@@ -10,9 +10,11 @@ export default ({ slides }) => {
   return (
     <div
       sx={{
-        minHeight: '100vh',
+        height: '100vh',
         color: 'white',
         bg: 'black',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
       }}>
       <div
         sx={{

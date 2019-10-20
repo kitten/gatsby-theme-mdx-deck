@@ -46,7 +46,10 @@ export const SlideList = ({
           sx={{
             m: 2,
             cursor: 'pointer',
-            outline: index === i ? `4px solid cyan` : null,
+            border: theme => index === i
+              ? `4px solid ${theme.colors.primary}`
+              : null,
+            bg: 'background',
             overflow: 'hidden'
           }}
         >
