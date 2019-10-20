@@ -13,6 +13,7 @@ import merge from 'lodash.merge'
 import useKeyboard from '../hooks/use-keyboard'
 import useStorage from '../hooks/use-storage'
 import useDeck from '../hooks/use-deck'
+import useSwipe from '../hooks/use-swipe'
 import useScale from '../hooks/use-scale'
 import Context from '../context'
 import Wrapper from './wrapper'
@@ -62,6 +63,7 @@ const mergeThemes = (...themes) =>
 const DefaultMode = ({ children }) => <React.Fragment children={children} />
 
 const TransitionRouter = ({ location, children }) => {
+  const swipeProps = useSwipe()
   const { theme: { transition }, slug } = useDeck()
 
   const from = (transition ? transition.length === 2 ? transition[1] : transition[0] : null) || {};
@@ -76,6 +78,7 @@ const TransitionRouter = ({ location, children }) => {
 
   return transitions.map(({ item, key, props }) => (
     <animated.div
+      {...swipeProps}
       key={key}
       style={props}
       sx={{

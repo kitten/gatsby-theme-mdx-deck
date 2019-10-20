@@ -24,10 +24,12 @@ export default props => {
     handleResize()
 
     window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
     document.body.addEventListener('touchstart', stopTouch)
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
       document.body.removeEventListener('touchstart', stopTouch)
     }
   }, [mode])
@@ -40,6 +42,7 @@ export default props => {
         height,
         position: 'relative',
         overflow: 'hidden',
+
         variant: 'styles.root',
         '*': {
           boxSizing: 'border-box',

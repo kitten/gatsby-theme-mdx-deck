@@ -4,7 +4,6 @@ import React, { Fragment, useMemo } from 'react'
 
 import Context from '../context'
 import useDeck from '../hooks/use-deck'
-import useSwipe from '../hooks/use-swipe'
 import useScale from '../hooks/use-scale'
 import { modes } from '../constants'
 
@@ -14,7 +13,6 @@ export const Slide = ({ slide, index, preview, className }) => {
   const slideHeight = outer.theme.size.height
 
   const [containerRef, scale] = useScale(slideWidth, slideHeight)
-  const swipeProps = useSwipe()
 
   const context = useMemo(() => ({
     ...outer,
@@ -26,7 +24,6 @@ export const Slide = ({ slide, index, preview, className }) => {
   return (
     <Context.Provider value={context}>
       <div
-        {...(!preview ? swipeProps : {})}
         ref={containerRef}
         className={className}
         sx={{
