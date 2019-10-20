@@ -26,11 +26,13 @@ export default props => {
     window.addEventListener('resize', handleResize)
     window.addEventListener('orientationchange', handleResize)
     document.body.addEventListener('touchstart', stopTouch)
+    document.body.addEventListener('touchmove', stopTouch)
 
     return () => {
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('orientationchange', handleResize)
       document.body.removeEventListener('touchstart', stopTouch)
+      document.body.removeEventListener('touchmove', stopTouch)
     }
   }, [mode])
 
