@@ -1,30 +1,41 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef, useMemo, useLayoutEffect, useEffect } from 'react'
+import useDeck from './use-deck'
 
-const useScale = (
-  slideWidth = 1366,
-  slideHeight = 768
-) => {
-  const [ratio, setRatio] = useState(1)
-  const [offsetX, setOffsetX] = useState(0)
-  const [offsetY, setOffsetY] = useState(0)
+const useIsomorphicEffect = typeof window === 'undefined'
+  ? useEffect
+  : useLayoutEffect;
+const initialState = {
+  ratio: 1,
+  offsetX: 0,
+  offsetY: 0
+};
 
-  useEffect(() => {
+const useScale = (slideWidth, slideHeight) => {
+  const ref = useRef(null)
+  const [ratio, setRatio] = useState(initialState.ratio)
+  const [offsetX, setOffsetX] = useState(initialState.offsetX)
+  const [offsetY, setOffsetY] = useState(initialState.offsetY)
+
+  useIsomorphicEffect(() => {
     const handleResize = () => {
-      const { innerWidth, innerHeight } = window
+      const { current: element } = ref
+      if (!element) return
+
+      const { width, height } = element.getBoundingClientRect()
       const useVerticalRatio =
-        innerWidth / innerHeight > slideWidth / slideHeight
+        width / height > slideWidth / slideHeight
       const ratio = useVerticalRatio
-        ? innerHeight / slideHeight
-        : innerWidth / slideWidth
+        ? height / slideHeight
+        : width / slideWidth
       const offsetX = useVerticalRatio
-        ? ((innerWidth - slideWidth * ratio) / 2) / ratio
+        ? ((width - slideWidth * ratio) / 2) / ratio
         : 0
       const offsetY = !useVerticalRatio
-        ? ((innerHeight - slideHeight * ratio) / 2) / ratio
+        ? ((height - slideHeight * ratio) / 2) / ratio
         : 0
-      setRatio(ratio)
-      setOffsetX(offsetX)
-      setOffsetY(offsetY)
+      setRatio(initialState.ratio = ratio)
+      setOffsetX(initialState.offsetX = offsetX)
+      setOffsetY(initialState.offsetY = offsetY)
     }
 
     handleResize()
@@ -35,7 +46,13 @@ const useScale = (
     }
   }, [slideWidth, slideHeight])
 
-  return { offsetX, offsetY, scale: ratio }
+  const scale = useMemo(() => ({
+    offsetX,
+    offsetY,
+    ratio
+  }), [offsetX, offsetY, ratio])
+
+  return [ref, scale]
 }
 
 export default useScale

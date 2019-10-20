@@ -39,6 +39,7 @@ export default props => {
         width,
         height,
         position: 'relative',
+        overflow: 'hidden',
         variant: 'styles.root',
         '*': {
           boxSizing: 'border-box',

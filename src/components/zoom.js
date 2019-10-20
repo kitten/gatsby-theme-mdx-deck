@@ -20,14 +20,12 @@ export const Zoom = ({ zoom = 1, ...props }) => {
         sx={{
           boxSizing: 'border-box',
           position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
+          top: '50%',
+          left: '50%',
           width: `${(1 / zoom) * 100}%`,
           height: `${(1 / zoom) * 100}%`,
-          transformOrigin: '0 0',
-          transform: `scale(${zoom})`,
+          transform: `translate(-50%, -50%) scale(${zoom})`,
+          transformOrigin: 'center',
         }}
       />
     </div>

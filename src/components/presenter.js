@@ -31,18 +31,18 @@ export const Presenter = ({ slides, children }) => {
         <div
           sx={{
             width: '75%',
+            position: 'relative',
+            overflow: 'hidden',
             p: 3,
           }}>
-          <Zoom zoom={3 / 4}>{children}</Zoom>
+          {children}
         </div>
         <div
           sx={{
             width: '25%',
             p: 3,
           }}>
-          <Zoom zoom={1 / 4}>
-            <Slide slide={next} preview />
-          </Zoom>
+          <Slide slide={next} preview />
           {notes && (
             <div
               sx={{

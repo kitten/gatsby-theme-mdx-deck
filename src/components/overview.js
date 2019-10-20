@@ -29,7 +29,6 @@ export default ({ slides, children }) => {
         }}>
         <SlideList
           slides={slides}
-          zoom={1 / 6}
           onClick={i => {
             navigate([slug, i].join('/'))
           }}
@@ -46,9 +45,11 @@ export default ({ slides, children }) => {
         }}>
         <div
           sx={{
+            position: 'relative',
+            overflow: 'hidden',
             flex: '1 1 auto',
           }}>
-          <Zoom zoom={5 / 6}>{children}</Zoom>
+          {children}
         </div>
         <div
           sx={{

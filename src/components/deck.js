@@ -1,4 +1,7 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
+
+import React, { useMemo } from 'react'
 import { useTransition, animated } from 'react-spring'
 import { Location, Router, globalHistory } from '@reach/router'
 import { Global } from '@emotion/core'
@@ -6,6 +9,7 @@ import { ThemeProvider } from 'theme-ui'
 import { Helmet } from 'react-helmet'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
+
 import useKeyboard from '../hooks/use-keyboard'
 import useStorage from '../hooks/use-storage'
 import useDeck from '../hooks/use-deck'
@@ -71,8 +75,20 @@ const TransitionRouter = ({ location, children }) => {
   })
 
   return transitions.map(({ item, key, props }) => (
-    <animated.div key={key} style={props}>
-      <Router basepath={slug} location={item} style={{ height: '100%' }}>
+    <animated.div
+      key={key}
+      style={props}
+      sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: '100%',
+        height: '100%'
+      }}
+    >
+      <Router basepath={slug} location={item} sx={{ width: '100%', height: '100%' }}>
         {children}
       </Router>
     </animated.div>
@@ -89,28 +105,24 @@ const Deck = ({
   const outer = useDeck()
   const index = getIndex()
 
-  const head = slides.head.children
+  const [components, mergedTheme] = useMemo(() => {
+    const { components, ...mergedTheme } = mergeThemes(
+      { ...baseTheme,...theme },
+      ...themes
+    )
 
-  const { components, ...mergedTheme } = mergeThemes(
-    { ...baseTheme,...theme },
-    ...themes
-  )
+    return [components, mergedTheme]
+  }, [theme, themes])
 
-  const scale = useScale(
-    mergedTheme.size.width,
-    mergedTheme.size.height,
-  )
-
-  const context = {
+  const context = useMemo(() => ({
     ...outer,
-    ...scale,
     slug,
     length: slides.length,
     index,
     steps: get(outer, `metadata.${index}.steps`),
     notes: get(outer, `metadata.${index}.notes`),
     theme: mergedTheme,
-  }
+  }), [outer, slug, length, index, mergedTheme]);
 
   let Mode = DefaultMode
 
@@ -132,7 +144,7 @@ const Deck = ({
     <>
       <Helmet>
         <title>{title}</title>
-        {head}
+        {slides.head.children}
       </Helmet>
       <GoogleFont theme={mergedTheme} />
       <Context.Provider value={context}>

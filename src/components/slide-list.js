@@ -9,11 +9,12 @@ const noop = () => {}
 
 export const SlideList = ({
   slides = [],
-  zoom = 1 / 4,
   onClick = noop,
   ...props
 }) => {
   const { index, theme } = useDeck()
+  const slideWidth = theme.size.width
+  const slideHeight = theme.size.height
   const thumb = useRef(null)
 
   useEffect(() => {
@@ -47,10 +48,10 @@ export const SlideList = ({
             m: 2,
             cursor: 'pointer',
             outline: index === i ? `4px solid cyan` : null,
-          }}>
-          <Zoom zoom={zoom}>
-            <Slide slide={slide} preview />
-          </Zoom>
+            overflow: 'hidden'
+          }}
+        >
+          <Slide slide={slide} preview />
         </div>
       ))}
     </React.Fragment>
