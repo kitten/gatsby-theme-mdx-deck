@@ -11,6 +11,7 @@ const keys = {
   up: 38,
   down: 40,
   space: 32,
+  f: 70,
   p: 80,
   o: 79,
   g: 71,
@@ -18,6 +19,9 @@ const keys = {
   pageUp: 33,
   pageDown: 34,
 }
+
+const toggleFullscreen = state =>
+  ({ fullscreen: !state.fullscreen })
 
 const toggleMode = next => state =>
   state.mode === next
@@ -50,6 +54,9 @@ export const useKeyboard = () => {
         }
       } else if (altKey) {
         switch (e.keyCode) {
+          case keys.f:
+            context.setState(toggleFullscreen)
+            break
           case keys.p:
             context.setState(toggleMode(modes.presenter))
             break

@@ -1,13 +1,19 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+
+import useFullscreen from '../hooks/use-fullscreen'
 import useDeck from '../hooks/use-deck'
 import { modes } from '../constants'
+import { requestFullscreen, exitFullscreen  } from '../constants'
 
 export default props => {
+  const containerRef = useRef(null)
   const [width, setWidth] = useState('100vw')
   const [height, setHeight] = useState('100vh')
-  const { mode } = useDeck()
+  const { mode, fullscreen } = useDeck()
+
+  useFullscreen(containerRef, !!fullscreen)
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,9 +45,11 @@ export default props => {
   return (
     <div
       {...props}
+      ref={containerRef}
       sx={{
-        width,
-        height,
+        bg: fullscreen ? 'background' : null,
+        width: fullscreen ? '100vw' : width,
+        height: fullscreen ? '100vh' : height,
         position: 'relative',
         overflow: 'hidden',
 
