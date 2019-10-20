@@ -2,12 +2,12 @@
 import { jsx } from 'theme-ui'
 import useDeck from '../hooks/use-deck'
 
-export const Background = ({ children }) => {
-  const { offsetX, offsetY, theme } = useDeck()
+export const Background = ({ children,...props }) => {
+  const { scale: { offsetX, offsetY } } = useDeck()
 
   return (
     <div
-      id="background"
+      {...props}
       sx={{
         position: 'absolute',
         top: -offsetY,
@@ -15,7 +15,7 @@ export const Background = ({ children }) => {
         left: -offsetX,
         right: -offsetX,
         pointerEvents: 'none',
-        ...theme.styles.background
+        variant: 'styles.Background'
       }}
     >
       {children}

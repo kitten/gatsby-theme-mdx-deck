@@ -42,6 +42,12 @@ export default {
       fontFamily: 'body',
       fontSize: [3, 4, 5, 6],
     },
+    Background: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     h1: {
       variant: 'text.heading',
     },

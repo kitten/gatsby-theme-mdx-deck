@@ -18,7 +18,7 @@ export const Slide = ({ slide, index, preview, className }) => {
 
   const context = useMemo(() => ({
     ...outer,
-    ...scale,
+    scale,
     index,
     preview,
   }), [outer, scale, index, preview])
