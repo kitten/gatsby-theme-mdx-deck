@@ -122,7 +122,7 @@ const Deck = ({
     steps: get(outer, `metadata.${index}.steps`),
     notes: get(outer, `metadata.${index}.notes`),
     theme: mergedTheme,
-  }), [outer, slug, length, index, mergedTheme]);
+  }), [outer, slug, slides.length, index, mergedTheme]);
 
   let Mode = DefaultMode
 
