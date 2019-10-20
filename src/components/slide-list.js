@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import React, { useEffect, useRef } from 'react'
-import Zoom from './zoom'
 import Slide from './slide'
 import useDeck from '../hooks/use-deck'
 
