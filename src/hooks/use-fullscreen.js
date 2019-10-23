@@ -37,9 +37,11 @@ const useFullscreen = (ref, isFullscreen) => {
     let fullscreenElement = getFullscreenElement()
 
     if (
-      !element ||
-      fullscreenElement !== element ||
-      !isFullscreen
+      fullscreenElement && (
+        !element ||
+        fullscreenElement !== element ||
+        !isFullscreen
+      )
     ) {
       fullscreenElement = null
       exitFullscreen()

@@ -15,7 +15,7 @@ export const Background = ({ children,...props }) => {
         left: -offsetX,
         right: -offsetX,
         pointerEvents: 'none',
-        variant: 'styles.Background'
+        variant: 'styles.Background',
       }}
     >
       {children}
