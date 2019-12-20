@@ -1,4 +1,9 @@
-const IS_LOCAL = process.cwd() === __dirname
+const path = require('path');
+const fs = require('fs');
+
+const CWD = process.cwd();
+const HAS_ASSETS = !!fs.existsSync(path.resolve(CWD, 'assets'));
+const IS_LOCAL = CWD === __dirname
 
 const remarkPlugins = [
   require('remark-unwrap-images'),
@@ -33,7 +38,7 @@ const config = (opts = {}) => ({
         path: 'decks',
       },
     },
-    {
+    HAS_ASSETS && {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'assets',
